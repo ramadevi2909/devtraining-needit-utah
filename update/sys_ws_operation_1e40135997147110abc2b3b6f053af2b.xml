@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?><record_update table="sys_ws_operation">
+    <sys_ws_operation action="INSERT_OR_UPDATE">
+        <active>true</active>
+        <consumes>application/json,application/xml,text/xml</consumes>
+        <consumes_customized>false</consumes_customized>
+        <default_operation_uri/>
+        <enforce_acl>cf9d01d3e73003009d6247e603f6a990</enforce_acl>
+        <http_method>GET</http_method>
+        <name>demo</name>
+        <operation_script><![CDATA[(function process(/*RESTAPIRequest*/ request, /*RESTAPIResponse*/ response) {
+    // Get parameters from the request
+    var tableName = request.queryParams.table_name;
+    var fieldName = request.queryParams.field_name;
+    //var fieldValue = request.queryParams.field_value;
+
+    // Validate parameters
+    if (!tableName || !fieldName /*|| !fieldValue*/) {
+        response.setStatus(400); // Bad Request
+        return {
+            error: "Please provide all three parameters: table_name, field_name, and field_value."
+        };
+    }
+
+    // Validate the table name
+    var validTables = ["incident", "change_request", "problem"]; // Add more valid table names if needed
+    if (validTables.indexOf(tableName) === -1) {
+        response.setStatus(400); // Bad Request
+        return {
+            error: "Invalid table_name. Supported table names: incident, change_request, problem."
+        };
+    }
+
+    // Validate the field name
+    var validFields = ["short_description", "description", "assigned_to"]; // Add more valid field names if needed
+    if (validFields.indexOf(fieldName) === -1) {
+        response.setStatus(400); // Bad Request
+        return {
+            error: "Invalid field_name. Supported field names: short_description, description, assigned_to."
+        };
+    }
+
+    // If all parameters are valid, perform the action based on the table, field, and field value
+    // Replace the following code with your specific logic to retrieve information based on the provided parameters.
+    // For example, you can use GlideRecord queries to fetch the data.
+
+    var result = "Successfully validated parameters: \n"
+        + "Table Name: " + tableName + "\n"
+        + "Field Name: " + fieldName ;
+      //  + "Field Value: " + fieldValue;
+
+    return {
+        result: result
+    };
+
+})(request, response);
+]]></operation_script>
+        <operation_uri>/api/x_58872_needit/demo</operation_uri>
+        <produces>application/json,application/xml,text/xml</produces>
+        <produces_customized>false</produces_customized>
+        <relative_path>/</relative_path>
+        <request_example/>
+        <requires_acl_authorization>true</requires_acl_authorization>
+        <requires_authentication>true</requires_authentication>
+        <requires_snc_internal_role>true</requires_snc_internal_role>
+        <short_description/>
+        <sys_class_name>sys_ws_operation</sys_class_name>
+        <sys_created_by>admin</sys_created_by>
+        <sys_created_on>2023-07-27 06:55:19</sys_created_on>
+        <sys_id>1e40135997147110abc2b3b6f053af2b</sys_id>
+        <sys_mod_count>2</sys_mod_count>
+        <sys_name>demo</sys_name>
+        <sys_package display_value="NeedIt" source="x_58872_needit">6ead8e780f603200cd674f8ce1050ed1</sys_package>
+        <sys_policy/>
+        <sys_scope display_value="NeedIt">6ead8e780f603200cd674f8ce1050ed1</sys_scope>
+        <sys_update_name>sys_ws_operation_1e40135997147110abc2b3b6f053af2b</sys_update_name>
+        <sys_updated_by>admin</sys_updated_by>
+        <sys_updated_on>2023-07-27 07:12:50</sys_updated_on>
+        <web_service_definition display_value="demo">e3ab8f1997147110abc2b3b6f053af61</web_service_definition>
+        <web_service_version/>
+    </sys_ws_operation>
+</record_update>
